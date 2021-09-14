@@ -1,0 +1,12 @@
+<div class="notificaciones" *ngIf="VM.HayNotificaciones">
+  <div class="notificacion" [class.error]="item.Type === VM.NotificationType.error"
+    *ngFor="let item of VM.Listado; let i=index">
+    {{item.Message}}
+    <button type="button" class="close" aria-label="Close" (click)="VM.remove(i)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="center">
+    <button class="btn btninfo btn-outline-primary" type="button" (click)="VM.clear()">Cerrar</button>
+  </div>
+</div>

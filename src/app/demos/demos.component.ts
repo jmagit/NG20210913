@@ -9,8 +9,52 @@ import { NotificationService, NotificationType } from '../common-services';
 })
 export class DemosComponent implements OnInit, OnDestroy {
   private suscriptor: Unsubscribable | undefined;
+  private nombre: string = 'mundo'
+  listado = [
+    { id: 1, nombre: 'Madrid'},
+    { id: 2, nombre: 'BARCELONA'},
+    { id: 3, nombre: 'sevilla'},
+    { id: 4, nombre: 'a Coruña'},
+  ]
+  idProvincia = 2;
+
+  resultado = ''
+  visible = true;
+  estetica = { importante: true, error: false, urgente: true }
 
   constructor(public vm: NotificationService) { }
+
+  public get Nombre(): string { return this.nombre; }
+  public set Nombre(value: string) {
+    if(this.nombre === value) return;
+    this.nombre = value;
+  }
+
+  saluda() {
+    this.resultado = `Hola ${this.Nombre}`
+  }
+  despide() {
+    this.resultado = `Adios ${this.Nombre}`
+  }
+  di(algo: string) {
+    this.resultado = `Dice ${algo}`
+  }
+
+  cambia() {
+    this.visible = !this.visible;
+    this.estetica.importante = !this.estetica.importante;
+    this.estetica.error = !this.estetica.error;
+  }
+
+  calcula(a: number, b: number): number {
+    return a + b;
+  }
+
+  add(provincia: string) {
+    const id = this.listado[this.listado.length - 1].id + 1;
+    this.listado.push({id, nombre: provincia})
+    this.idProvincia = id;
+  }
 
   ngOnInit(): void {
     this.suscriptor = this.vm.Notificacion.subscribe(n => {

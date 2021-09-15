@@ -2,10 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Unsubscribable } from 'rxjs';
 import { NotificationService, NotificationType } from '../common-services';
 
+import { Injectable } from '@angular/core';
+
+@Injectable({providedIn: 'root'})
+export class DemoService {
+  constructor() { }
+  nombre: string = 'mundo'
+
+}
 @Component({
   selector: 'app-demos',
   templateUrl: './demos.component.html',
-  styleUrls: ['./demos.component.css']
+  styleUrls: ['./demos.component.css'],
+  // providers: [ DemoService ]
 })
 export class DemosComponent implements OnInit, OnDestroy {
   private suscriptor: Unsubscribable | undefined;
@@ -23,12 +32,12 @@ export class DemosComponent implements OnInit, OnDestroy {
   estetica = { importante: true, error: false, urgente: true }
   fontsize = 24;
 
-  constructor(public vm: NotificationService) { }
+  constructor(public vm: NotificationService, private estado: DemoService) { }
 
-  public get Nombre(): string { return this.nombre; }
+  public get Nombre(): string { return this.estado.nombre; }
   public set Nombre(value: string) {
-    if(this.nombre === value) return;
-    this.nombre = value;
+    if(this.estado.nombre === value) return;
+    this.estado.nombre = value;
   }
 
   saluda() {

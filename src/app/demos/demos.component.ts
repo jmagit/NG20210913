@@ -21,6 +21,7 @@ export class DemosComponent implements OnInit, OnDestroy {
   resultado = ''
   visible = true;
   estetica = { importante: true, error: false, urgente: true }
+  fontsize = 24;
 
   constructor(public vm: NotificationService) { }
 

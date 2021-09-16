@@ -14,8 +14,18 @@ export class ElipsisPipe implements PipeTransform {
 })
 export class CapitalizePipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    return value.replace(/[^\s]+/g, (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase());
+    return value?.charAt(0)?.toUpperCase() + value?.substring(1)?.toLowerCase();
   }
 }
 
-export const PIPES_CADENAS = [ ElipsisPipe, CapitalizePipe, ]
+@Pipe({name: 'striptags'})
+export class StripTagsPipe implements PipeTransform {
+
+  transform(text: string, ...allowedTags: any[]): string {
+    return allowedTags.length > 0
+      ? text.replace(new RegExp(`<(?!\/?(${allowedTags.join('|')})\s*\/?)[^>]+>`, 'g'), '')
+      : text.replace(/<(?:.|\s)*?>/g, '');
+  }
+}
+
+export const PIPES_CADENAS = [ ElipsisPipe, CapitalizePipe, StripTagsPipe, ]

@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { CommonServicesModule } from '../common-services';
 import { NotificationComponent } from './notification/notification.component';
 import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
+import { SecurityModule } from '../security';
+import { AjaxWaitComponent } from './ajax-wait';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -10,13 +14,16 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     NotificationComponent,
     HomeComponent,
+    AjaxWaitComponent,
+    PageNotFoundComponent,
   ],
   exports: [
     NotificationComponent,
     HomeComponent,
+    AjaxWaitComponent,
   ],
   imports: [
-    CommonModule, CommonServicesModule,
+    CommonModule, CommonServicesModule, SecurityModule, RouterModule.forChild([]),
   ]
 })
 export class MainModule {

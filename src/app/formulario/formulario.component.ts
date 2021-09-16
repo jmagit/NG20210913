@@ -65,6 +65,6 @@ export class FormularioComponent implements OnInit {
           err => this.notify.add(err.message)
         )
     }
-    alert((this.isAdd ? 'Añadiendo ' : 'Modificando ') + JSON.stringify(this.elemento))
+    // alert((this.isAdd ? 'Añadiendo ' : 'Modificando ') + JSON.stringify(this.elemento))
   }
 }

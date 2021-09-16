@@ -17,14 +17,16 @@
     <br>
     Nombre:
     <input type="text" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel"
-      required minlength="2" maxlength="10" >
+      required minlength="2" maxlength="10" uppercase >
     <span class="error" [hidden]="!nombre.errors?.required" >Es obligatorio</span>
     <span class="error" [hidden]="!nombre.errors?.minlength && !nombre.errors?.maxlength" >Debe tener entre 2 y 10 letras</span>
+    <span class="error" [hidden]="!nombre.errors?.uppercase" >{{nombre.errors?.uppercase}}</span>
     <br>
     Apellidos:
     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
-      minlength="2" maxlength="10">
+      minlength="2" maxlength="10" validateEqual="nombre">
     <span class="error" [hidden]="!apellidos.errors?.minlength && !apellidos.errors?.maxlength" >Debe tener entre 2 y 10 letras</span>
+    {{apellidos.errors | json}}
     <br>
     Edad:
     <input type="number" id="edad" name="edad" [(ngModel)]="elemento.edad" #edad="ngModel"
@@ -32,12 +34,12 @@
     <span class="error" [hidden]="!edad.errors?.min && !edad.errors?.max" >Debe estar entre los 16 y 67 años</span>
     <br>
     NIF:
-    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel" >
-    <span class="error" [hidden]="!nif.errors?.nif" >{{nif.errors?.nif}}</span>
+    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel" nif >
+    <span class="error" [hidden]="!nif.errors?.nif" >No es un NIF correcto</span> {{nif.errors | json}}
     <br>
     Correo:
-    <input type="email" id="correo" name="correo" [(ngModel)]="elemento.correo" #correo="ngModel" >
-    <span class="error" [hidden]="!correo.errors?.email" >Formato incorrecto</span>
+    <input type="url" id="correo" name="correo" [(ngModel)]="elemento.correo" #correo="ngModel" >
+    <span class="error" [hidden]="!correo.errors?.type" >{{correo.errors?.type}}</span>
   </p>
   <p>
     <input type="button" value="Enviar" (click)="enviar()" [disabled]="miForm.invalid" >

@@ -21,7 +21,8 @@ import { DemosComponent } from './demos/demos.component';
 import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AjaxWaitInterceptor } from './main/ajax-wait';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoggerService,
     { provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL },
     { provide: LOCALE_ID, useValue: 'es-ES' },
-  ],
+    { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

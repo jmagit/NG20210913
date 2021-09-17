@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SecurityModule } from '../security';
 import { AjaxWaitComponent } from './ajax-wait';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -16,12 +17,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeComponent,
     AjaxWaitComponent,
     PageNotFoundComponent,
+    HeaderComponent,
   ],
   exports: [
     NotificationComponent,
     HomeComponent,
     AjaxWaitComponent,
-  ],
+    PageNotFoundComponent,
+    HeaderComponent,
+ ],
   imports: [
     CommonModule, CommonServicesModule, SecurityModule, RouterModule.forChild([]),
   ]

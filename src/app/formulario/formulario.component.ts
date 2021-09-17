@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { RESTDAOService } from '../base-code/RESTDAOService';
 import { NotificationService, NotificationType } from '../common-services';
+import { AUTH_REQUIRED } from '../security';
 
 class Persona {
   id: number | null = null;
@@ -17,7 +18,7 @@ class Persona {
 @Injectable({ providedIn: 'root' })
 export class PersonasDAOService extends RESTDAOService<Persona, number> {
   constructor(http: HttpClient) {
-    super(http, 'personas')
+    super(http, 'personas', { context: new HttpContext().set(AUTH_REQUIRED, true) })
   }
 }
 

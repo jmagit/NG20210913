@@ -29,7 +29,8 @@ export class BlogViewModelService {
   protected listURL = '/blog';
 
   constructor(protected notify: NotificationService, protected out: LoggerService,
-              protected dao: BlogDAOService, private navigation: NavigationService) { }
+              protected dao: BlogDAOService, private navigation: NavigationService,
+              protected router: Router) { }
 
   public get Modo(): ModoCRUD { return this.modo; }
   public get Listado(): Array<any> { return this.listado; }
@@ -81,9 +82,9 @@ export class BlogViewModelService {
   public cancel(): void {
     this.elemento = {};
     this.idOriginal = null;
-    this.list();
+    // this.list();
     // this.router.navigateByUrl(this.listURL);
-    // this.navigation.back()
+    this.navigation.back()
   }
   public send(): void {
     switch (this.modo) {

@@ -12,25 +12,25 @@ export class BlogComponent implements OnInit {
   constructor(protected vm: BlogViewModelService, protected route: ActivatedRoute, protected router: Router) { }
   public get VM(): BlogViewModelService { return this.vm; }
   ngOnInit(): void {
-    this.vm.list();
-    // let id = this.route.snapshot.params['id'];
-    // if (id) {
-    //   if (this.route.snapshot.url.slice(-1)[0]?.path === 'edit') {
-    //     this.vm.edit(+id);
-    //   } else {
-    //     this.vm.view(+id);
-    //   }
-    // } else if (this.route.snapshot.url.slice(-1)[0]?.path === 'add') {
-    //   this.vm.add();
-    // } else {
-    //   this.vm.list();
-    // }
+    // this.vm.list();
+    let id = this.route.snapshot.params['id'];
+    if (id) {
+      if (this.route.snapshot.url.slice(-1)[0]?.path === 'edit') {
+        this.vm.edit(+id);
+      } else {
+        this.vm.view(+id);
+      }
+    } else if (this.route.snapshot.url.slice(-1)[0]?.path === 'add') {
+      this.vm.add();
+    } else {
+      this.vm.list();
+    }
   }
 }
 
 @Component({
   selector: 'app-blog-list',
-  templateUrl: './tmpl-list.sin-rutas.component.html',
+  templateUrl: './tmpl-list.con-rutas.component.html',
   styleUrls: ['./componente.component.css']
 })
 export class BlogListComponent implements OnInit, OnDestroy {
